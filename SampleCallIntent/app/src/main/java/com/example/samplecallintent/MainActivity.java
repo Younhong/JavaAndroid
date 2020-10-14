@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         "com.example.samplecallintent",
                         "com.example.samplecallintent.MenuActivity");
                 intent.setComponent(name);
+                intent.putExtra("name", "younhong");
                 startActivityForResult(intent, 101);
             }
         });
