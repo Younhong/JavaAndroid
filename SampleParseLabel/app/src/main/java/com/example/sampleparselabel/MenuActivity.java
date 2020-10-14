@@ -22,9 +22,6 @@ public class MenuActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("name", "mike");
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
