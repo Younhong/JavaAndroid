@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 if (idText.getText().toString().isEmpty() | pwText.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "아이디와 비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
                 } else{
+                    idText.setText("");
+                    pwText.setText("");
                     Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                     startActivityForResult(intent, REQUEST_CODE_MENU);
                 }
