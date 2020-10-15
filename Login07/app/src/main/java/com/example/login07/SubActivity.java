@@ -17,8 +17,9 @@ public class SubActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub);
 
         Intent intent = getIntent();
+        final String name = intent.getStringExtra("name");
         textView = findViewById(R.id.textView);
-        textView.setText(intent.getStringExtra("name"));
+        textView.setText(name);
 
         textView = findViewById(R.id.textView);
         Button toMenuButton = findViewById(R.id.toMenuButton);
@@ -38,6 +39,7 @@ public class SubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent loginIntent = new Intent();
                 loginIntent.putExtra("dest", "login");
+                loginIntent.putExtra("from", name);
                 setResult(RESULT_OK, loginIntent);
                 finish();
             }

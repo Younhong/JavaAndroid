@@ -54,7 +54,11 @@ public class MenuActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_MENU) {
             if (resultCode == RESULT_OK) {
                 String dest = data.getStringExtra("dest");
+                String from = data.getStringExtra("from");
                 if (dest.equals("login")) {
+                    Intent intent = new Intent();
+                    intent.putExtra("from", from);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
             }

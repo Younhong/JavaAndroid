@@ -37,15 +37,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == REQUEST_CODE_MENU) {
-//            if (resultCode == RESULT_OK) {
-//                String name = data.getStringExtra("button");
-//                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_MENU) {
+            if (resultCode == RESULT_OK) {
+                String name = data.getStringExtra("from");
+                Toast.makeText(getApplicationContext(), name, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }
