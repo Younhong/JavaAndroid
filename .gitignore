@@ -10,3 +10,5 @@
 /*/.cxx
 /.DS_Store
 /*/app/src/.DS_Store
+/*/app/src/androidTest/*
+/*/app/src/test/*
