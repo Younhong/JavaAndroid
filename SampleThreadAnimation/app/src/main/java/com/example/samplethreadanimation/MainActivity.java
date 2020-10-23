@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         imageView.setImageDrawable(drawable);
                     }
                 });
-                
+
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
