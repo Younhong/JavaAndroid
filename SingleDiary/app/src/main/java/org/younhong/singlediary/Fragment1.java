@@ -2,6 +2,7 @@ package org.younhong.singlediary;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,13 @@ public class Fragment1 extends Fragment {
     Context context;
     OnTabItemSelectedListener listener;
     
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
         
         if (context instanceof OnTabItemSelectedListener) {
-            listener = (OnTabItemSelectedListener) listener;
+            listener = (OnTabItemSelectedListener) context;
         }
     }
     
@@ -55,6 +57,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View v) {
                 if (listener != null) {
                     listener.onTabSelected(1);
+                    Log.d("button", "Selected");
                 }
             }
         });
