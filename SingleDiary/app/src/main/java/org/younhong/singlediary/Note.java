@@ -11,8 +11,7 @@ public class Note {
     String picture;
     String createDateStr;
 
-    public Note(int _id, String weather, String address, String locationX, String locationY, String contents,
-                String mood, String picture, String createDateStr) {
+    public Note(int _id, String weather, String address, String locationX, String locationY, String contents, String mood, String picture, String createDateStr) {
         this._id = _id;
         this.weather = weather;
         this.address = address;

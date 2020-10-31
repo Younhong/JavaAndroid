@@ -12,27 +12,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
-        implements OnNoteItemClickListener {
+                            implements OnNoteItemClickListener {
     ArrayList<Note> items = new ArrayList<Note>();
+
     OnNoteItemClickListener listener;
+
     int layoutType = 0;
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.note_item, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View itemView = inflater.inflate(R.layout.note_item, viewGroup, false);
+
         return new ViewHolder(itemView, this, layoutType);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Note item = items.get(position);
-        holder.setItem(item);
-        holder.setLayoutType(layoutType);
+        viewHolder.setItem(item);
+        viewHolder.setLayoutType(layoutType);
     }
 
     @Override
@@ -56,15 +58,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         this.listener = listener;
     }
 
-    public void switchLayout(int position) {
-        layoutType = position;
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if (listener != null) {
+            listener.onItemClick(holder, view, position);
+        }
     }
 
-    @Override
-    public void OnItemClick(ViewHolder holder, View view, int position) {
-        if (listener != null) {
-            listener.OnItemClick(holder, view, position);
-        }
+    public void switchLayout(int position) {
+        layoutType = position;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -73,49 +75,58 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
         ImageView moodImageView;
         ImageView moodImageView2;
+
         ImageView pictureExistsImageView;
         ImageView pictureImageView;
+
         ImageView weatherImageView;
         ImageView weatherImageView2;
 
         TextView contentsTextView;
         TextView contentsTextView2;
+
         TextView locationTextView;
         TextView locationTextView2;
+
         TextView dateTextView;
         TextView dateTextView2;
 
-        public ViewHolder(@NonNull View itemView, final OnNoteItemClickListener listener,
-                          int layoutType) {
+        public ViewHolder(View itemView, final OnNoteItemClickListener listener, int layoutType) {
             super(itemView);
+
 
             layout1 = itemView.findViewById(R.id.layout1);
             layout2 = itemView.findViewById(R.id.layout2);
 
             moodImageView = itemView.findViewById(R.id.moodImageView);
             moodImageView2 = itemView.findViewById(R.id.moodImageView2);
+
             pictureExistsImageView = itemView.findViewById(R.id.pictureExistsImageView);
             pictureImageView = itemView.findViewById(R.id.pictureImageView);
+
             weatherImageView = itemView.findViewById(R.id.weatherImageView);
             weatherImageView2 = itemView.findViewById(R.id.weatherImageView2);
 
             contentsTextView = itemView.findViewById(R.id.contentsTextView);
             contentsTextView2 = itemView.findViewById(R.id.contentsTextView2);
+
             locationTextView = itemView.findViewById(R.id.locationTextView);
             locationTextView2 = itemView.findViewById(R.id.locationTextView2);
+
             dateTextView = itemView.findViewById(R.id.dateTextView);
             dateTextView2 = itemView.findViewById(R.id.dateTextView2);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     int position = getAdapterPosition();
 
                     if (listener != null) {
-                        listener.OnItemClick(ViewHolder.this, v, position);
+                        listener.onItemClick(ViewHolder.this, view, position);
                     }
                 }
             });
+
             setLayoutType(layoutType);
         }
 
@@ -128,21 +139,25 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             if (picturePath != null && !picturePath.equals("")) {
                 pictureExistsImageView.setVisibility(View.VISIBLE);
                 pictureImageView.setVisibility(View.VISIBLE);
-                pictureImageView.setImageURI(Uri.parse("file://"+picturePath));
+                pictureImageView.setImageURI(Uri.parse("file://" + picturePath));
+
             } else {
                 pictureExistsImageView.setVisibility(View.GONE);
                 pictureImageView.setVisibility(View.GONE);
                 pictureImageView.setImageResource(R.drawable.noimagefound);
             }
 
+            // set weather
             String weather = item.getWeather();
             int weatherIndex = Integer.parseInt(weather);
             setWeatherImage(weatherIndex);
 
             contentsTextView.setText(item.getContents());
             contentsTextView2.setText(item.getContents());
+
             locationTextView.setText(item.getAddress());
             locationTextView2.setText(item.getAddress());
+
             dateTextView.setText(item.getCreateDateStr());
             dateTextView2.setText(item.getCreateDateStr());
         }
@@ -177,7 +192,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
         }
 
         public void setWeatherImage(int weatherIndex) {
-            switch (weatherIndex) {
+            switch(weatherIndex) {
                 case 0:
                     weatherImageView.setImageResource(R.drawable.weather_icon_1);
                     weatherImageView2.setImageResource(R.drawable.weather_icon_1);
