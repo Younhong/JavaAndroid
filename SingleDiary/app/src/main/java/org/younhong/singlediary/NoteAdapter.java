@@ -80,8 +80,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
         TextView contentsTextView;
         TextView contentsTextView2;
-        TextView locationView;
-        TextView locationView2;
+        TextView locationTextView;
+        TextView locationTextView2;
         TextView dateTextView;
         TextView dateTextView2;
 
@@ -101,8 +101,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
 
             contentsTextView = itemView.findViewById(R.id.contentsTextView);
             contentsTextView2 = itemView.findViewById(R.id.contentsTextView2);
-            locationView = itemView.findViewById(R.id.locationTextView);
-            locationView2 = itemView.findViewById(R.id.locationTextView2);
+            locationTextView = itemView.findViewById(R.id.locationTextView);
+            locationTextView2 = itemView.findViewById(R.id.locationTextView2);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             dateTextView2 = itemView.findViewById(R.id.dateTextView2);
 
@@ -134,6 +134,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
                 pictureImageView.setVisibility(View.GONE);
                 pictureImageView.setImageResource(R.drawable.noimagefound);
             }
+
+            String weather = item.getWeather();
+            int weatherIndex = Integer.parseInt(weather);
+            setWeatherImage(weatherIndex);
+
+            contentsTextView.setText(item.getContents());
+            contentsTextView2.setText(item.getContents());
+            locationTextView.setText(item.getAddress());
+            locationTextView2.setText(item.getAddress());
+            dateTextView.setText(item.getCreateDateStr());
+            dateTextView2.setText(item.getCreateDateStr());
         }
 
         public void setMoodImage(int moodIndex) {
@@ -165,7 +176,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder>
             }
         }
 
-        public void weatherImage(int weatherIndex) {
+        public void setWeatherImage(int weatherIndex) {
             switch (weatherIndex) {
                 case 0:
                     weatherImageView.setImageResource(R.drawable.weather_icon_1);
