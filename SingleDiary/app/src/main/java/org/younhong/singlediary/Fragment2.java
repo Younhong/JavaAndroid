@@ -448,7 +448,6 @@ public class Fragment2 extends Fragment {
     }
 
     public static Bitmap decodeSampledBitmapFromResource(File res, int reqWidth, int reqHeight) {
-
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;

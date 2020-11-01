@@ -118,8 +118,6 @@ public class NoteDatabase {
 		return true;
 	}
 
-
-
 	/**
 	 * Database Helper inner class
 	 */
