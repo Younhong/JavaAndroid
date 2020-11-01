@@ -229,8 +229,6 @@ public class MyLocationProvider extends AppWidgetProvider {
             xcoord = longitude;
             ycoord = latitude;
             Log.d(TAG, "coordinates : " + latitude + ", " + longitude);
-
         }
     }
-
 }
